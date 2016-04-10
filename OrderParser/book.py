@@ -52,7 +52,7 @@ def parse(file_path):
     order_list = []
     for row_val in range(len(receiptor_names)):
         order = {'receiptor_name': receiptor_names[row_val],
-                 'receiptor_phones': receiptor_phones[row_val],
+                 'receiptor_phone': receiptor_phones[row_val],
                  'zipcode': zipcodes[row_val],
                  'address': addresses[row_val],
                  'order_num': order_nums[row_val],
@@ -63,4 +63,6 @@ def parse(file_path):
 
     for row_val in range(len(order_list)):
         print(order_list[row_val])
+
+    return order_list
 
