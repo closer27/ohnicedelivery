@@ -27,16 +27,6 @@ def parse(file_path):
     idx_product_option = 17
     idx_caution = 42
 
-    receiptor_names = []
-    receiptor_phones = []
-    zipcodes = []
-    addresses = []
-    order_nums = []
-    product_names = []
-    product_options = []
-    cautions = []
-
-
     order_list = []
     for row_val in range(worksheet.nrows):
         if row_val > 0:    # 헤더 제외
