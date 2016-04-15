@@ -12,13 +12,15 @@ def get_newfile_path(current_file_path):
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        filepath = sys.argv[1]
-        print('file name : ' + filepath)
-        from OrderParser.book import parse
-        order_list = parse(filepath)
+        filepaths = []
+        for argv in sys.argv[1:]:
+            filepaths.append(argv)
+
+        from OrderParser.reader import get_orderlist
+        order_list = get_orderlist(filepaths)
 
         from OrderParser.writer import write_to_xls
-        write_to_xls(order_list, get_newfile_path(filepath))
+        write_to_xls(order_list, get_newfile_path(sys.argv[1]))
 
     else:
         print('not correct file, please check again')
