@@ -4,8 +4,6 @@ import sys
 import os
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSignal
-from OrderParser.reader import get_orderlist
-from OrderParser.writer import write_to_xls
 
 PROGRAM_TITLE = 'Delivery Swimmer'
 
@@ -14,6 +12,7 @@ class MyWidget(QWidget):
     dropped = pyqtSignal(str)
     input_path_arr = []
     output_path = ''
+    order_data = []
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -53,21 +52,24 @@ class MyWidget(QWidget):
             event.ignore()
 
     def process(self, input_path):
+        self.input_path_arr.append(input_path)
+
         self.label.setText(input_path + "가 추가되었습니다.")
-        # Todo : handling multiple files
-        return
 
     def progress_spreadsheet(self):
+        from OrderParser.reader import get_orderlist
+        self.order_data = get_orderlist(self.input_path_arr)
+
+        from OrderParser.writer import write_to_xls
+        write_to_xls(self.order_data, self.get_newfile_path(sys.argv[1]))
+
         self.progressBar.setRange(0, 0)
-        # Todo: process spreadsheet
-        return
 
-
-def get_newfile_path(current_file_path):
-    import time
-    today = time.strftime("플래네틸_%Y%m%d_라투투발주리스트")
-    output_dir = os.path.dirname(current_file_path)
-    return os.path.join(output_dir, today + '.xls')
+    def get_newfile_path(self, current_file_path):
+        import time
+        today = time.strftime("플래네틸_%Y%m%d_라투투발주리스트")
+        output_dir = os.path.dirname(current_file_path)
+        return os.path.join(output_dir, today + '.xls')
 
 
 if __name__ == '__main__':
