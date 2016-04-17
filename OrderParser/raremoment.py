@@ -21,7 +21,7 @@ def parse(file_path):
     idx_product_option = 3
     idx_caution = 11
 
-    with open(file_path) as myfile:
+    with open(file_path, 'r', encoding='utf-8') as myfile:
         data = myfile.read()
 
     print("Reading 'raremoment' order success.")
