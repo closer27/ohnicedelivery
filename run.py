@@ -8,6 +8,15 @@ from PyQt5.QtCore import pyqtSignal
 PROGRAM_TITLE = 'Delivery Swimmer'
 
 
+from flask import Flask, request, jsonify, render_template
+app = Flask(__name__)
+
+
+@app.route('/')
+def hello_world():
+    return render_template('index.html')
+
+
 class MyWidget(QWidget):
     dropped = pyqtSignal(str)
     input_path_arr = []
@@ -81,12 +90,12 @@ class MyWidget(QWidget):
 
 
 if __name__ == '__main__':
-
-    app = QApplication(sys.argv)
-    w = MyWidget()
-    w.resize(250, 150)
-    w.move(300, 300)
-    w.setWindowTitle("Delivery Swimmer")
-    w.show()
-
-    sys.exit(app.exec_())
+    app.run()
+    # app = QApplication(sys.argv)
+    # w = MyWidget()
+    # w.resize(250, 150)
+    # w.move(300, 300)
+    # w.setWindowTitle("Delivery Swimmer")
+    # w.show()
+    #
+    # sys.exit(app.exec_())
