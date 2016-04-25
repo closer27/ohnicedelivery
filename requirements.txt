@@ -2,3 +2,5 @@ xlrd==0.9.4
 xlwt==1.0.0
 py2app==0.10
 beautifulsoup4
+distribute
+flask
