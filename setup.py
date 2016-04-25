@@ -14,7 +14,7 @@ setup(name=APP_NAME,
       app=["run.py"],
       options={
           "py2app": {
-              "argv_emulation": True,
+              "argv_emulation": False,
               "includes": ["PyQt5",
                            "PyQt5.QtCore",
                            "PyQt5.QtWidgets",
@@ -22,10 +22,10 @@ setup(name=APP_NAME,
                            "sip",
                            "xlrd",
                            "xlwt",
-                           "xlwt.Workbook"
+                           "xlwt.Workbook",
                            "bs4",
                            "OrderParser"],
-              "packages": ["OrderParser", "xlwt", "xlrd"],
+              "packages": ["PyQt5", "OrderParser", "xlwt", "xlrd"],
               "iconfile": "icon.icns",
               "plist": {
                   'CFBundleName': APP_NAME,
