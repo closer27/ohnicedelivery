@@ -1,19 +1,14 @@
 __author__ = 'wonny'
 
-import os
 import csv
 
 
-def parse(file_path):
-    if os.path.exists(file_path):
-        print(file_path)
-    else:
-        print("not exist file")
-        exit()
-
-    f = open(file_path, encoding='cp949')
-    csv_f = csv.reader(f, delimiter=',')
+def parse(file_storage):
+    f = str(file_storage.read(), encoding='cp949')
+    csv_f = csv.reader(f.split('\r\n'), delimiter=',')
     data = list(filter(lambda x: len(x) >= 17, [list(row) for row in csv_f]))[1:]
+    for row in csv_f:
+        print(row)
 
     print("Reading 'book' order success.")
 
@@ -47,7 +42,6 @@ def parse(file_path):
         cautions.append(data[row_val][idx_caution])
 
     print("Complete parsing.")
-    f.close()
 
     order_list = []
     for row_val in range(len(receiptor_names)):
