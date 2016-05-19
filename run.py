@@ -8,13 +8,51 @@ from PyQt5.QtCore import pyqtSignal
 PROGRAM_TITLE = 'Delivery Swimmer'
 
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request
+
+UPLOAD_FOLDER = '/path/to/the/uploads'
+ALLOWED_EXTENSIONS = set(['xls', 'xlsx', 'csv'])
+
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-@app.route('/')
-def hello_world():
-    return render_template('index.html')
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+
+@app.route('/', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        files = request.files.getlist("file[]")
+        print(files)
+        for file in files:
+            print(file.filename)
+            if not file or not allowed_file(file.filename):
+                return '잘못된 파일이에요 : xls, xlsx, csv 파일만 올려주세요.'
+
+
+        from OrderParser.reader import get_orderlist
+        order_data = get_orderlist(files)
+        print(order_data)
+
+        return "hello"
+
+        # from OrderParser.writer import write_to_xls
+        # write_to_xls(self.order_data, self.get_newfile_path(self.input_path_arr[0]))
+
+        # return redirect(url_for('uploaded_file',
+        #                         filename=filename))
+    return '''
+        <!doctype html>
+        <title>Upload new File</title>
+        <h1>Upload new File</h1>
+        <form action="" method=post enctype=multipart/form-data>
+          <p><input type=file name="file[]" multiple="multiple">
+             <input type=submit value=Upload>
+        </form>
+        '''
 
 
 class MyWidget(QWidget):
@@ -90,12 +128,5 @@ class MyWidget(QWidget):
 
 
 if __name__ == '__main__':
+    app.debug = True
     app.run()
-    # app = QApplication(sys.argv)
-    # w = MyWidget()
-    # w.resize(250, 150)
-    # w.move(300, 300)
-    # w.setWindowTitle("Delivery Swimmer")
-    # w.show()
-    #
-    # sys.exit(app.exec_())
