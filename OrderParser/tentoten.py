@@ -1,16 +1,9 @@
 __author__ = 'wonny'
 
-import os
 from bs4 import BeautifulSoup
 
 
-def parse(file_path):
-    if os.path.exists(file_path):
-        print(file_path)
-    else:
-        print("not exist file")
-        exit()
-
+def parse(file_storage):
 
     # 10x10's order sheet
     idx_receiptor_name = 6
@@ -22,8 +15,8 @@ def parse(file_path):
     idx_product_option = 15
     idx_caution = 11
 
-    with open(file_path, encoding='cp949') as myfile:
-        data = myfile.read()
+    data = file_storage.read()
+    file_storage.seek(0)
 
     print("Reading 'ten to ten' order success.")
 

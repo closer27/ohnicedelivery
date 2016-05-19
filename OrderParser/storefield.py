@@ -1,18 +1,11 @@
 # -*- coding: cp949 -*-
 __author__ = 'wonny'
 
-import os
 import xlrd
 
 
-def parse(file_path):
-    if os.path.exists(file_path):
-        print(file_path)
-    else:
-        print("not exist file")
-        exit()
-
-    workbook = xlrd.open_workbook(file_path)
+def parse(file_storage):
+    workbook = xlrd.open_workbook(file_contents=file_storage.stream.read())
     worksheet = workbook.sheet_by_index(0)    # 시트번호(인덱스)로 시트 가져오기
 
     print("Reading 'storefield' order success.")
