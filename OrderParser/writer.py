@@ -3,7 +3,7 @@ __author__ = 'wonny'
 import xlwt
 
 
-def write_to_xls(order_list, output_path):
+def write_to_xls(order_list):
     workbook = xlwt.Workbook(encoding="utf-8")  # utf-8 인코딩 방식의 workbook 생성
     workbook.default_style.font.height = 20 * 11  # (11pt) 기본폰트설정 다양한건 찾아보길
 
@@ -51,7 +51,10 @@ def write_to_xls(order_list, output_path):
 
     print("새 파일 쓰기 완료, 저장 중")
 
-    workbook.save(output_path)  # 엑셀 파일 저장 및 생성
-
+    from io import BytesIO
+    f = BytesIO()
+    workbook.save(f)  # 엑셀 파일 저장 및 생성
+    f.seek(0)
     print("저장 완료")
 
+    return f
