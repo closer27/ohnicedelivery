@@ -1,5 +1,6 @@
 __author__ = 'wonny'
 
+import sys
 from flask import Flask, request, send_file, make_response
 
 PROGRAM_TITLE = 'Delivery Swimmer'
@@ -62,4 +63,5 @@ def upload_file():
         '''
 
 if __name__ == '__main__':
-    app.run()
+
+    app.run(host='0.0.0.0', port=int(sys.argv[1]))
