@@ -29,7 +29,7 @@ def write_to_xls(order_list):
 
     for row_val in range(len(order_list)):
         order = order_list[row_val]
-        worksheet.write(row_val+1, 0, row_val, font_style)
+        worksheet.write(row_val+1, 0, row_val+1, font_style)
         worksheet.write(row_val+1, 2, order['receiptor_name'], font_style)
         worksheet.write(row_val+1, 3, order['receiptor_phone'], font_style)
         worksheet.write(row_val+1, 5, order['zipcode'], font_style)
