@@ -1,7 +1,7 @@
 __author__ = 'wonny'
 
 import sys
-from flask import Flask, request, send_file, make_response
+from flask import Flask, request, send_file, make_response, render_template
 
 PROGRAM_TITLE = 'Delivery Swimmer'
 
@@ -52,15 +52,7 @@ def upload_file():
 
         return response
 
-    return '''
-        <!doctype html>
-        <title>Upload new File</title>
-        <h1>Upload new File</h1>
-        <form action="" method=post enctype=multipart/form-data>
-          <p><input type=file name="file[]" multiple="multiple">
-             <input type=submit value=Upload>
-        </form>
-        '''
+    return render_template('index.html')
 
 if __name__ == '__main__':
 
