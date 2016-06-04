@@ -11,7 +11,7 @@ def parse(file_storage):
     print("Reading 'storefield' order success.")
 
     # storefield's order sheet
-    idx_receiptor_name = 4
+    idx_receiptor_name = 6
     idx_receiptor_phone = 37
     idx_zipcode = 41
     idx_address = 39
