@@ -4,6 +4,7 @@ import OrderParser.book as book
 import OrderParser.storefield as storefield
 import OrderParser.raremoment as raremoment
 import OrderParser.tentoten as tentoten
+import OrderParser.cracker as cracker
 
 
 def get_orderlist(filepaths):
@@ -25,6 +26,8 @@ def get_data_from_file(file):
         return tentoten.parse(file)
     elif "배송리스트" in file.filename:
         return book.parse(file)
+    elif "orders" in file.filename:
+        return cracker.parse(file)
     else:
         print("잘못된 파일이 들어가있어요 ㅜㅜ 파일을 올바르게 다시 넣어주세요")
         return None
