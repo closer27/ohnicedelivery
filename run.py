@@ -1,12 +1,11 @@
-__author__ = 'wonny'
-
 import sys
 from flask import Flask, request, send_file, make_response, render_template
+from OrderParser.order_manager import OrderManager
 
 PROGRAM_TITLE = 'Delivery Swimmer'
 
 UPLOAD_FOLDER = '/path/to/the/uploads'
-ALLOWED_EXTENSIONS = set(['xls', 'xlsx', 'csv'])
+ALLOWED_EXTENSIONS = {'xls', 'xlsx', 'csv'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -34,17 +33,14 @@ def upload_file():
             if not file or not allowed_file(file.filename):
                 return '잘못된 파일이에요 : xls, xlsx, csv 파일만 올려주세요.'
 
-        from OrderParser.reader import get_orderlist
-        order_data = get_orderlist(files)
-
-        from OrderParser.writer import write_to_xls
-        f = write_to_xls(order_data)
+        order_manager = OrderManager(files=files)
+        f = order_manager.get_unified_sheet()
 
         from urllib import parse
         response = make_response(send_file(f))
         response.headers["Content-Disposition"] = \
             "attachment; " \
-            "filenane={ascii_filename};" \
+            "filename={ascii_filename};" \
             "filename*=UTF-8''{utf_filename}".format(
                 ascii_filename="book.pdf",
                 utf_filename=parse.quote(get_newfile_path())
@@ -54,6 +50,7 @@ def upload_file():
 
     return render_template('index.html')
 
-if __name__ == '__main__':
 
-    app.run(host='0.0.0.0', port=int(sys.argv[1]))
+if __name__ == '__main__':
+    # app.run(host='0.0.0.0', port=int(sys.argv[1]))
+    app.run(debug=True)

@@ -1,4 +1,5 @@
 from OrderParser.reader import Reader
+from OrderParser.writer import write_to_xls
 
 
 class OrderManager:
@@ -10,3 +11,6 @@ class OrderManager:
         order_list = self.reader.get_order_list()
         print(order_list)
         return order_list
+
+    def get_unified_sheet(self):
+        return write_to_xls(self.get_order_list())
