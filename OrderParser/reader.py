@@ -36,8 +36,8 @@ class Reader:
             return self.csv_reader.get_order_list(file=file, seller=Book())
         elif "orders" in file.filename:
             return self.csv_reader.get_order_list(file=file, seller=Biskit(), encoding="utf-8")
-        # elif "보사랑" in file.filename:
-        #     return self.html_reader.get_order_list(file=file, seller=Uniqmoment())
+        elif "보사랑" in file.filename:
+            return self.csv_reader.get_order_list(file=file, seller=Babosarang(), encoding='euc-kr')
         else:
             print("잘못된 파일이 들어가있어요 ㅜㅜ 파일을 올바르게 다시 넣어주세요")
             return None

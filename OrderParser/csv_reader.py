@@ -1,6 +1,7 @@
 from OrderParser.order import Order
 from OrderParser.seller import Seller
 import csv
+import io
 
 
 class CsvReader:
@@ -8,11 +9,15 @@ class CsvReader:
         pass
 
     def get_order_list(self, file, seller: Seller, encoding='cp949'):
-        f = str(file.read(), encoding=encoding)
-        csv_f = csv.reader(f.split('\r\n'), delimiter=',')
+        if seller.description() == "Babosarang":
+            buf = io.StringIO(file.read().decode('cp949'))
+            buf.seek(0)
+            csv_f = csv.reader(buf, delimiter='\t', dialect=csv.excel_tab)
+        else:
+            f = str(file.read(), encoding=encoding)
+            csv_f = csv.reader(f.split('\r\n'), delimiter=',')
+
         data = list(filter(lambda x: len(x) >= 17, [list(row) for row in csv_f]))[1:]
-        # for row in csv_f:
-        #     print(row)
 
         recipient_names = []
         recipient_phones = []

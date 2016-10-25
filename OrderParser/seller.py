@@ -8,6 +8,9 @@ class Seller:
     idx_product_option = 0
     idx_caution = 0
 
+    def description(self):
+        pass
+
 
 class TenByTen(Seller):
     idx_recipient_name = 6
@@ -18,6 +21,9 @@ class TenByTen(Seller):
     idx_product_name = 14
     idx_product_option = 15
     idx_caution = 11
+
+    def description(self):
+        return "TenByTen"
 
 
 class Book(Seller):
@@ -30,6 +36,9 @@ class Book(Seller):
     idx_product_option = 5
     idx_caution = 12
 
+    def description(self):
+        return "Book"
+
 
 class StoreFarm(Seller):
     idx_recipient_name = 9
@@ -40,6 +49,9 @@ class StoreFarm(Seller):
     idx_product_name = 15
     idx_product_option = 17
     idx_caution = 42
+
+    def description(self):
+        return "TenByTen"
 
 
 class Uniqmoment(Seller):
@@ -52,6 +64,9 @@ class Uniqmoment(Seller):
     idx_product_option = 3
     idx_caution = 11
 
+    def description(self):
+        return "Uniqmoment"
+
 
 class Babosarang(Seller):
     idx_recipient_name = 15
@@ -62,6 +77,9 @@ class Babosarang(Seller):
     idx_product_name = 5
     idx_product_option = 6
     idx_caution = 21
+
+    def description(self):
+        return "Babosarang"
 
 
 class Biskit(Seller):
@@ -74,6 +92,9 @@ class Biskit(Seller):
     idx_product_option = 4
     idx_caution = 15
 
+    def description(self):
+        return "Biskit"
+
 
 class Aland(Seller):
     idx_receiptor_name = 7
@@ -84,3 +105,6 @@ class Aland(Seller):
     idx_product_name = 18
     idx_product_option = 20
     idx_caution = 12
+
+    def description(self):
+        return "Aland"
