@@ -18,6 +18,9 @@ class CsvReader:
             csv_f = csv.reader(f.split('\r\n'), delimiter=',')
 
         data = list(filter(lambda x: len(x) >= 17, [list(row) for row in csv_f]))[1:]
+        if seller.description() == "Babosarang":
+            data2 = list(map(lambda x: list(map(lambda elem: elem[1:] if elem.startswith('\'') else elem, x)), data))
+            data = data2
 
         recipient_names = []
         recipient_phones = []
