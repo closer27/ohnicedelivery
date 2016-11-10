@@ -97,14 +97,14 @@ class Biskit(Seller):
 
 
 class Aland(Seller):
-    idx_receiptor_name = 7
-    idx_receiptor_phone = 9
-    idx_zipcode = 10
-    idx_address = 11
-    idx_order_num = 2
-    idx_product_name = 18
-    idx_product_option = 20
-    idx_caution = 12
+    idx_recipient_name = 0
+    idx_recipient_phone = 1
+    idx_zipcode = 3
+    idx_address = 4
+    idx_order_num = 6
+    idx_product_name = 7
+    idx_product_option = 9  # No mean. just index of blank
+    idx_caution = 11
 
     def description(self):
         return "Aland"
