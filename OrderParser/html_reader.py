@@ -11,7 +11,7 @@ class HTMLReader:
         data = file.read()
         file.seek(0)
 
-        soup = BeautifulSoup(data, 'html.parser')
+        soup = BeautifulSoup(data, 'html.parser', from_encoding='cp949')
         table = soup.find("table")
 
         order_list = []
