@@ -28,8 +28,8 @@ class Reader:
             return self.html_reader.get_order_list(file=file, seller=TenByTen())
         elif "uniq" in file.filename:
             return self.html_reader.get_order_list(file=file, seller=Uniqmoment())
-        elif "GDorder" in file.filename:
-            return self.html_reader.get_order_list(file=file, seller=Aland())
+        elif "정보" in file.filename:
+            return self.xls_reader.get_order_list(file=file, seller=Aland())
         elif "스토어" in file.filename:
             return self.xls_reader.get_order_list(file=file, seller=StoreFarm())
         elif "배송리스트" in file.filename:
