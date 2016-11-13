@@ -33,37 +33,6 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-            function alertFilename()
-            {
-                var sellers = ["TEN", "uniq", "%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9",
-                "%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%8B%E1%85%A5",
-                "%E1%84%87%E1%85%A2%E1%84%89%E1%85%A9%E1%86%BC%E1%84%85%E1%85%B5%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3",
-                "orders", "%E1%84%87%E1%85%A9%E1%84%89%E1%85%A1%E1%84%85%E1%85%A1%E1%86%BC"];
-                for (var i=0; i< sellers.length; i++) {
-                    var elem = document.getElementById(sellers[i]);
-                    elem.style.backgroundColor = "white";
-                }
-
-                var files = document.getElementById('upload_files').files;
-                for (var i = 0; i < files.length; ++i) {
-                  var name = files.item(i).name;
-                  var encodedName = encodeURI(name);
-
-                  var validSellers = [];
-                  for (let seller of sellers) {
-                    if (encodedName.includes(seller)) {
-                        validSellers.push(seller);
-                    }
-                  }
-
-                  for (var validSeller of validSellers) {
-                    var elem = document.getElementById(validSeller);
-                    elem.style.backgroundColor = "green";
-                  }
-                }
-            }
-    </script>
     {% endblock %}
 </head>
 
@@ -100,7 +69,7 @@
                 <div align="center" style="height: 80px;">
                     <input type=file name="file[]" id="upload_files" multiple="multiple"
                            class="btn btn-default btn-file"
-                           style="width: 526px;" onchange="alertFilename()">
+                           style="width: 526px;" onchange="validateFiles()">
                     <div style="margin-top: 10px">
                         <table>
                             <tr>
