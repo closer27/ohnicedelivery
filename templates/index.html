@@ -33,6 +33,29 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+            function alertFilename()
+            {
+                var sellers = ["TEN", "uniq", "정보", "스토어", "배송리스트", "orders", "보사랑"];
+                for (var i=0; i< sellers.length; i++) {
+                    var elem = document.getElementById(sellers[i]);
+                    elem.style.backgroundColor = "white";
+                }
+
+                var files = document.getElementById('upload_files').files;
+                for (var i = 0; i < files.length; ++i) {
+                  var name = files.item(i).name;
+                  for (let seller of sellers) {
+                    var elem = document.getElementById(seller);
+                    if (name.includes(seller)) {
+                        elem.style.backgroundColor = "green";
+                    } else {
+                        elem.style.backgroundColor = "white";
+                    }
+                  }
+                }
+            }
+    </script>
     {% endblock %}
 </head>
 
@@ -67,10 +90,33 @@
             <div class="intro-heading">Have a nice day<br>with<br>Delivery Swimmer</div>
             <form action="" method=post enctype=multipart/form-data>
                 <div align="center" style="height: 80px;">
-                    <input type=file name="file[]" multiple="multiple" class="btn btn-default btn-file"
-                           style="width: 526px;">
+                    <input type=file name="file[]" id="upload_files" multiple="multiple"
+                           class="btn btn-default btn-file"
+                           style="width: 526px;" onchange="alertFilename()">
+                    <div style="margin-top: 10px">
+                        <table>
+                            <tr>
+                                <td id="TEN" style="width: 80px; height: 48px; background-color:white" align="center">
+                                    <img src="{{ url_for('static', filename='img/10x10.jpg') }}" width="74px"></td>
+                                <td id="배송리스트" style="width: 80px; height: 48px; background-color:white" align="center">
+                                    <img src="{{ url_for('static', filename='img/1300k.jpg') }}" width="74px"></td>
+                                <td id="정보" style="width: 80px; height: 48px; background-color:white" align="center">
+                                    <img src="{{ url_for('static', filename='img/aland.jpg') }}" width="74px"></td>
+                                <td id="orders" style="width: 80px; height: 48px; background-color:white" align="center">
+                                    <img src="{{ url_for('static', filename='img/biskit.jpg') }}" width="74px"></td>
+                                <td id="스토어" style="width: 80px; height: 48px; background-color:white" align="center">
+                                    <img src="{{ url_for('static', filename='img/storefarm.jpg') }}" width="74px"></td>
+                                <td id="uniq" style="width: 80px; height: 48px; background-color:white"
+                                    align="center"><img src="{{ url_for('static', filename='img/uniqmoment.jpg') }}"
+                                                        width="74px"></td>
+                                <td id="보사랑" style="width: 80px; height: 48px; background-color:white"
+                                    align="center"><img src="{{ url_for('static', filename='img/babosarang.jpg') }}"
+                                                        width="74px"></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-                <input type=submit value="Transform!!" class="page-scroll btn btn-xl">
+                <input type=submit value="Transform!!" class="page-scroll btn btn-xl" style="margin-top: 50px">
             </form>
         </div>
     </div>
