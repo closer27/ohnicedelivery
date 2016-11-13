@@ -36,7 +36,10 @@
     <script type="text/javascript">
             function alertFilename()
             {
-                var sellers = ["TEN", "uniq", "정보", "스토어", "배송리스트", "orders", "보사랑"];
+                var sellers = ["TEN", "uniq", "%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9",
+                "%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%8B%E1%85%A5",
+                "%E1%84%87%E1%85%A2%E1%84%89%E1%85%A9%E1%86%BC%E1%84%85%E1%85%B5%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3",
+                "orders", "%E1%84%87%E1%85%A9%E1%84%89%E1%85%A1%E1%84%85%E1%85%A1%E1%86%BC"];
                 for (var i=0; i< sellers.length; i++) {
                     var elem = document.getElementById(sellers[i]);
                     elem.style.backgroundColor = "white";
@@ -45,13 +48,18 @@
                 var files = document.getElementById('upload_files').files;
                 for (var i = 0; i < files.length; ++i) {
                   var name = files.item(i).name;
+                  var encodedName = encodeURI(name);
+
+                  var validSellers = [];
                   for (let seller of sellers) {
-                    var elem = document.getElementById(seller);
-                    if (name.includes(seller)) {
-                        elem.style.backgroundColor = "green";
-                    } else {
-                        elem.style.backgroundColor = "white";
+                    if (encodedName.includes(seller)) {
+                        validSellers.push(seller);
                     }
+                  }
+
+                  for (var validSeller of validSellers) {
+                    var elem = document.getElementById(validSeller);
+                    elem.style.backgroundColor = "green";
                   }
                 }
             }
@@ -88,7 +96,7 @@
                 <img src="{{ url_for('static', filename='img/logo-white.png') }}" class="img-responsive">
             </div>
             <div class="intro-heading">Have a nice day<br>with<br>Delivery Swimmer</div>
-            <form action="" method=post enctype=multipart/form-data>
+            <form action="" method=post enctype=multipart/form-data accept-charset='euc-kr'>
                 <div align="center" style="height: 80px;">
                     <input type=file name="file[]" id="upload_files" multiple="multiple"
                            class="btn btn-default btn-file"
@@ -98,18 +106,23 @@
                             <tr>
                                 <td id="TEN" style="width: 80px; height: 48px; background-color:white" align="center">
                                     <img src="{{ url_for('static', filename='img/10x10.jpg') }}" width="74px"></td>
-                                <td id="배송리스트" style="width: 80px; height: 48px; background-color:white" align="center">
+                                <td id="%E1%84%87%E1%85%A2%E1%84%89%E1%85%A9%E1%86%BC%E1%84%85%E1%85%B5%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3"
+                                    style="width: 80px; height: 48px; background-color:white" align="center">
                                     <img src="{{ url_for('static', filename='img/1300k.jpg') }}" width="74px"></td>
-                                <td id="정보" style="width: 80px; height: 48px; background-color:white" align="center">
+                                <td id="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9"
+                                    style="width: 80px; height: 48px; background-color:white" align="center">
                                     <img src="{{ url_for('static', filename='img/aland.jpg') }}" width="74px"></td>
-                                <td id="orders" style="width: 80px; height: 48px; background-color:white" align="center">
+                                <td id="orders" style="width: 80px; height: 48px; background-color:white"
+                                    align="center">
                                     <img src="{{ url_for('static', filename='img/biskit.jpg') }}" width="74px"></td>
-                                <td id="스토어" style="width: 80px; height: 48px; background-color:white" align="center">
+                                <td id="%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%8B%E1%85%A5"
+                                    style="width: 80px; height: 48px; background-color:white" align="center">
                                     <img src="{{ url_for('static', filename='img/storefarm.jpg') }}" width="74px"></td>
                                 <td id="uniq" style="width: 80px; height: 48px; background-color:white"
                                     align="center"><img src="{{ url_for('static', filename='img/uniqmoment.jpg') }}"
                                                         width="74px"></td>
-                                <td id="보사랑" style="width: 80px; height: 48px; background-color:white"
+                                <td id="%E1%84%87%E1%85%A9%E1%84%89%E1%85%A1%E1%84%85%E1%85%A1%E1%86%BC"
+                                    style="width: 80px; height: 48px; background-color:white"
                                     align="center"><img src="{{ url_for('static', filename='img/babosarang.jpg') }}"
                                                         width="74px"></td>
                             </tr>
