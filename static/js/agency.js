@@ -51,20 +51,23 @@ function validateFiles()
     var files = document.getElementById('upload_files').files;
     for (var i = 0; i < files.length; ++i) {
       var name = files.item(i).name;
-      var encodedName = encodeURI(name);
+
+      if (navigator.platform === "MacIntel") {
+        name = encodeURI(name);
+      }
 
       var validSellers = [];
-
       let isAllowedFile = false;
+
       for (let seller of sellers) {
-        if (encodedName.includes(seller)) {
+        if (name.includes(seller)) {
             validSellers.push(seller);
             isAllowedFile = true;
             break;
         }
       }
       if (!isAllowedFile) {
-        alert(`${name}은 현재 변환을 지원하지 않는 파일입니다. 쇼핑몰 측에서 파일포맷을 변경했을 수 있으니 관리자에게 문의하세요.`);
+        alert(`${files.item(i).name}은 현재 변환을 지원하지 않는 파일입니다. 쇼핑몰 측에서 파일포맷을 변경했을 수 있으니 관리자에게 문의하세요.`);
       }
 
       // change css style if relevant file.
