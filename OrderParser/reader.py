@@ -25,7 +25,7 @@ class Reader:
 
     def transform_sheet(self, file):
         if "TEN" in file.filename:
-            return self.html_reader.get_order_list(file=file, seller=TenByTen())
+            return self.xls_reader.get_order_list(file=file, seller=TenByTen())
         elif "uniq" in file.filename:
             return self.html_reader.get_order_list(file=file, seller=Uniqmoment())
         elif "정보" in file.filename:
