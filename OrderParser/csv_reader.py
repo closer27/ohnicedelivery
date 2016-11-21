@@ -2,7 +2,7 @@ from OrderParser.order import Order
 from OrderParser.seller import Seller
 import csv
 import io
-
+import re
 
 class CsvReader:
     def __init__(self):
@@ -15,7 +15,9 @@ class CsvReader:
             csv_f = csv.reader(buf, delimiter='\t', dialect=csv.excel_tab)
         else:
             f = str(file.read(), encoding=encoding)
-            csv_f = csv.reader(f.split('\r\n'), delimiter=',')
+            f = f.strip("\r")             # strip '\r'
+            f = re.sub("<[^>]*>", "", f)  # strip html tags
+            csv_f = csv.reader(f.split('\n'), delimiter=',')
 
         data = list(filter(lambda x: len(x) >= 17, [list(row) for row in csv_f]))[1:]
         if seller.description() == "Babosarang":
