@@ -42,16 +42,16 @@ class Book(Seller):
 
 class StoreFarm(Seller):
     idx_recipient_name = 9
-    idx_recipient_phone = 56
-    idx_zipcode = 41
-    idx_address = 39
+    idx_recipient_phone = 58
+    idx_zipcode = 43
+    idx_address = 41
     idx_order_num = 1
     idx_product_name = 15
     idx_product_option = 17
-    idx_caution = 42
+    idx_caution = 44
 
     def description(self):
-        return "TenByTen"
+        return "Storefarm"
 
 
 class Uniqmoment(Seller):
