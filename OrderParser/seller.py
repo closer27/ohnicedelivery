@@ -68,20 +68,6 @@ class Uniqmoment(Seller):
         return "Uniqmoment"
 
 
-class Babosarang(Seller):
-    idx_recipient_name = 15
-    idx_recipient_phone = 16
-    idx_zipcode = 18
-    idx_address = 19
-    idx_order_num = 0
-    idx_product_name = 5
-    idx_product_option = 6
-    idx_caution = 21
-
-    def description(self):
-        return "Babosarang"
-
-
 class Biskit(Seller):
     idx_recipient_name = 9
     idx_recipient_phone = 14
