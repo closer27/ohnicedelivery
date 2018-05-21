@@ -1,6 +1,5 @@
 xlrd==1.0.0
 xlwt==1.1.2
 beautifulsoup4==4.4.0
-distribute
 flask
 gunicorn
