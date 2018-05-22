@@ -37,7 +37,8 @@ def upload_file():
         f = order_manager.get_unified_sheet()
 
         from urllib import parse
-        response = make_response(send_file(f))
+        response = make_response(send_file(filename_or_fp=f, mimetype='application/vnd.ms-excel',
+                                           as_attachment=True, attachment_filename=get_newfile_path()))
         response.headers["Content-Disposition"] = \
             "attachment; " \
             "filename={ascii_filename};" \
