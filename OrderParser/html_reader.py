@@ -12,10 +12,16 @@ class HTMLReader:
         file.seek(0)
 
         soup = BeautifulSoup(data, 'html.parser', from_encoding='cp949')
-        table = soup.find("table")
+
+        if soup.find('tbody'):
+            table = soup.find('tbody')
+            start_index = 0
+        else:
+            table = soup.find("table")
+            start_index = 1
 
         order_list = []
-        for row in table.find_all("tr")[1:]:
+        for row in table.find_all("tr")[start_index:]:
             row_data = row.find_all("td")
             order_dict = {'recipient_name': row_data[seller.idx_recipient_name].get_text(),
                           'recipient_phone': row_data[seller.idx_recipient_phone].get_text(),
