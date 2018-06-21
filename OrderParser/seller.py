@@ -94,3 +94,17 @@ class Aland(Seller):
 
     def description(self):
         return "Aland"
+
+
+class Hottracks(Seller):
+    idx_recipient_name = 7
+    idx_recipient_phone = 8
+    idx_zipcode = 12
+    idx_address = 13
+    idx_order_num = 6
+    idx_product_name = 16
+    idx_product_option = 17  # No mean. just index of blank
+    idx_caution = 9
+
+    def description(self):
+        return "Hottracks"
