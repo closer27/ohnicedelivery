@@ -12,8 +12,10 @@ class XlsReader:
         worksheet = workbook.sheet_by_index(0)  # 시트번호(인덱스)로 시트 가져오기
 
         order_list = []
+        indexForHeader = 1 if seller.description() == "Storefarm" else 0
+        print(seller.description())
         for row_val in range(worksheet.nrows):
-            if row_val > 0:  # 헤더 제외
+            if row_val > indexForHeader:  # 헤더 제외
                 row_data = worksheet.row_values(row_val)
                 order_dict = {'recipient_name': row_data[seller.idx_recipient_name],
                               'recipient_phone': row_data[seller.idx_recipient_phone],

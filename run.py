@@ -18,7 +18,7 @@ def allowed_file(filename):
 
 def get_newfile_path():
     import time
-    today = "{}{}{}".format('오나이스피스', time.strftime("%Y%m%d"), '_라투투발주리스트.xls')
+    today = "{}{}{}".format('오나이스피스_', time.strftime("%Y%m%d"), '_라투투발주리스트.xls')
     print(today)
     return today
 

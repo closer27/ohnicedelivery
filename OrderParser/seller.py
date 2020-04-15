@@ -42,7 +42,7 @@ class Book(Seller):
 
 class StoreFarm(Seller):
     idx_recipient_name = 9
-    idx_recipient_phone = 58
+    idx_recipient_phone = 39
     idx_zipcode = 43
     idx_address = 41
     idx_order_num = 1
