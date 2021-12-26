@@ -17,10 +17,7 @@ def allowed_file(filename):
 
 
 def get_newfile_path():
-    import time
-    today = "{}{}{}".format('오나이스피스_', time.strftime("%Y%m%d"), '_라투투발주리스트.xls')
-    print(today)
-    return today
+    return "{}".format('배송지_오나이스피스.xls')
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -37,7 +34,7 @@ def upload_file():
         f = order_manager.get_unified_sheet()
 
         from urllib import parse
-        response = make_response(send_file(filename_or_fp=f, mimetype='application/vnd.ms-excel',
+        response = make_response(send_file(f, mimetype='application/vnd.ms-excel',
                                            as_attachment=True, attachment_filename=get_newfile_path()))
         response.headers["Content-Disposition"] = \
             "attachment; " \
