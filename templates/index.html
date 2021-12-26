@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DeliverySwimmer - Order files transformer{% block title %}{% endblock %}</title>
+    <title>oh nice delivery - combine your order files :){% block title %}{% endblock %}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
@@ -44,7 +44,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
 
-            <a class="navbar-brand page-scroll" href="#page-top">Delivery Swimmer</a>
+            <a class="navbar-brand page-scroll" href="#page-top">oh nice piece</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -62,43 +62,16 @@
         <div class="intro-text">
 
             <div align="center" style="margin-bottom: 50px;">
-                <img src="{{ url_for('static', filename='img/logo-white.png') }}" class="img-responsive">
+                <img src="{{ url_for('static', filename='img/onp1.png') }}" class="img-responsive">
             </div>
-            <div class="intro-heading">Have a nice day<br>with<br>Delivery Swimmer</div>
+            <div class="intro-heading">Have a great day<br>with<br>onp delivery</div>
             <form action="" method=post enctype=multipart/form-data>
                 <div align="center" style="height: 80px;">
                     <input type=file name="file[]" id="upload_files" multiple="multiple"
                            class="btn btn-default btn-file"
                            style="width: 526px;" onchange="validateFiles()">
-                    <div style="margin-top: 10px">
-                        <table>
-                            <tr>
-                                <td id="TEN" style="width: 80px; height: 48px; background-color:white" align="center">
-                                    <img src="{{ url_for('static', filename='img/10x10.jpg') }}" width="74px"></td>
-                                <td id="%E1%84%87%E1%85%A2%E1%84%89%E1%85%A9%E1%86%BC%E1%84%85%E1%85%B5%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3"
-                                    style="width: 80px; height: 48px; background-color:white" align="center">
-                                    <img src="{{ url_for('static', filename='img/1300k.jpg') }}" width="74px"></td>
-                                <td id="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9"
-                                    style="width: 80px; height: 48px; background-color:white" align="center">
-                                    <img src="{{ url_for('static', filename='img/aland.jpg') }}" width="74px"></td>
-                                <td id="orders" style="width: 80px; height: 48px; background-color:white"
-                                    align="center">
-                                    <img src="{{ url_for('static', filename='img/biskit.jpg') }}" width="74px"></td>
-                                <td id="%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%8B%E1%85%A5"
-                                    style="width: 80px; height: 48px; background-color:white" align="center">
-                                    <img src="{{ url_for('static', filename='img/storefarm.jpg') }}" width="74px"></td>
-                                <td id="uniq" style="width: 80px; height: 48px; background-color:white"
-                                    align="center"><img src="{{ url_for('static', filename='img/uniqmoment.jpg') }}"
-                                                        width="74px"></td>
-                                <td id="%E1%84%87%E1%85%A9%E1%84%89%E1%85%A1%E1%84%85%E1%85%A1%E1%86%BC"
-                                    style="width: 80px; height: 48px; background-color:white"
-                                    align="center"><img src="{{ url_for('static', filename='img/babosarang.jpg') }}"
-                                                        width="74px"></td>
-                            </tr>
-                        </table>
-                    </div>
                 </div>
-                <input type=submit value="Transform!!" class="page-scroll btn btn-xl" style="margin-top: 50px">
+                <input type=submit value="변환하기" class="page-scroll btn btn-xl" style="margin-top: 50px">
             </form>
         </div>
     </div>
@@ -108,7 +81,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <span class="copyright">Copyright © Planetill 2016</span>
+                <span class="copyright">Copyright © onpstudio 2020</span>
             </div>
 
 

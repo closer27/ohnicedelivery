@@ -2,7 +2,7 @@ import sys
 from flask import Flask, request, send_file, make_response, render_template
 from OrderParser.order_manager import OrderManager
 
-PROGRAM_TITLE = 'Delivery Swimmer'
+PROGRAM_TITLE = 'oh nice delivery'
 
 UPLOAD_FOLDER = '/path/to/the/uploads'
 ALLOWED_EXTENSIONS = {'xls', 'xlsx', 'csv'}
@@ -18,7 +18,7 @@ def allowed_file(filename):
 
 def get_newfile_path():
     import time
-    today = "{}{}{}".format('플래네틸', time.strftime("%Y%m%d"), '_라투투발주리스트.xls')
+    today = "{}{}{}".format('오나이스피스_', time.strftime("%Y%m%d"), '_라투투발주리스트.xls')
     print(today)
     return today
 
