@@ -36,8 +36,9 @@ def write_to_xls(order_list):
         worksheet.write(row_val+1, 0, order.recipient_name, font_style)
         worksheet.write(row_val+1, 2, order.address, font_style)
         worksheet.write(row_val+1, 3, order.recipient_phone, font_style)
-        worksheet.write(row_val+1, 5, order.recipient_name + "_\n" + order.product_name + "_" + order.product_option + "\n_1개", font_style)
+        worksheet.write(row_val+1, 5, "[위탁][패키지]" + order.recipient_name + "_" + order.product_option + "_1개", font_style)
         worksheet.write(row_val+1, 6, order.caution, font_style)
+        worksheet.write(row_val+1, 7, order.product_name, font_style)
 
     # worksheet.col(0).width = 256* 10 #(key byte) 칸 너비 설정
     worksheet.col(0).width = 256 * 7  # 휴대폰 칸 너비 설정
@@ -47,6 +48,7 @@ def write_to_xls(order_list):
     worksheet.col(4).width = 256 * 18  # 운송잔 칸 너비 설정
     worksheet.col(5).width = 256 * 61  # 주문번호 칸 너비 설정
     worksheet.col(6).width = 256 * 11  # 상품명 칸 너비 설정
+    worksheet.col(7).width = 256 * 61  # 참고용 칸
 
     print("새 파일 쓰기 완료, 저장 중")
 
