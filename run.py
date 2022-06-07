@@ -17,7 +17,8 @@ def allowed_file(filename):
 
 
 def get_newfile_path():
-    return "{}".format('배송지_오나이스피스.xls')
+    import time
+    return "{}{}{}{}".format('배송지_오나이스피스_', time.strftime("%y", time.localtime()), time.strftime("%m%d"), ".xls")
 
 
 @app.route('/', methods=['GET', 'POST'])
