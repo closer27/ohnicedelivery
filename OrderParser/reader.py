@@ -1,4 +1,4 @@
-from OrderParser.seller import TenByTen, Biskit, Book, StoreFarm, Uniqmoment, Aland, Hottracks
+from OrderParser.seller import TenByTen, Book, StoreFarm
 from OrderParser.xls_reader import XlsReader
 from OrderParser.html_reader import HTMLReader
 from OrderParser.csv_reader import CsvReader
@@ -28,18 +28,10 @@ class Reader:
         print(unicodedata.normalize('NFKC', "스마트스토어") in filename)
         if "TEN" in filename:
             return self.html_reader.get_order_list(file=file, seller=TenByTen())
-        elif "uniq" in filename:
-            return self.html_reader.get_order_list(file=file, seller=Uniqmoment())
-        elif unicodedata.normalize('NFKC', "정보") in filename:
-            return self.xls_reader.get_order_list(file=file, seller=Aland())
         elif unicodedata.normalize('NFKC', "스마트스토어") in filename:
             return self.xls_reader.get_order_list(file=file, seller=StoreFarm())
         elif unicodedata.normalize('NFKC', "배송리스트") in filename:
             return self.csv_reader.get_order_list(file=file, seller=Book())
-        elif "orders" in filename:
-            return self.csv_reader.get_order_list(file=file, seller=Biskit(), encoding="utf-8")
-        elif "vendor" in filename:
-            return self.html_reader.get_order_list(file=file, seller=Hottracks())
         else:
             print("잘못된 파일이 들어가있어요 ㅜㅜ 파일을 올바르게 다시 넣어주세요")
             return None
