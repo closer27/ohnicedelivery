@@ -1,26 +1,22 @@
 from OrderParser.order import Order
-from OrderParser.seller import Seller
+from OrderParser.seller import Seller, Idus
 import csv
 import io
 import re
+
 
 class CsvReader:
     def __init__(self):
         pass
 
     def get_order_list(self, file, seller: Seller, encoding='cp949'):
-        if seller.description() == "Babosarang":
-            buf = io.StringIO(file.read().decode('cp949'))
-            buf.seek(0)
-            csv_f = csv.reader(buf, delimiter='\t', dialect=csv.excel_tab)
-        else:
-            f = str(file.read(), encoding=encoding)
-            f = f.strip("\r")             # strip '\r'
-            f = re.sub("<[^>]*>", "", f)  # strip html tags
-            csv_f = csv.reader(f.split('\n'), delimiter=',')
+        f = str(file.read(), encoding=encoding)
+        f = f.strip("\r")  # strip '\r'
+        f = re.sub("<[^>]*>", "", f)  # strip html tags
+        csv_f = csv.reader(f.split('\n'), delimiter=',')
 
         data = list(filter(lambda x: len(x) >= 17, [list(row) for row in csv_f]))[1:]
-        if seller.description() == "Babosarang":
+        if type(seller) is Idus:
             data2 = list(map(lambda x: list(map(lambda elem: elem[1:] if elem.startswith('\'') else elem, x)), data))
             data = data2
 
