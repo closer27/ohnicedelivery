@@ -52,3 +52,45 @@ class StoreFarm(Seller):
 
     def description(self):
         return "Storefarm"
+
+
+class Ably(Seller):
+    idx_recipient_name = 12
+    idx_recipient_phone = 13
+    idx_zipcode = 14
+    idx_address = 15
+    idx_order_num = 1
+    idx_product_name = 6
+    idx_product_option = 8
+    idx_caution = 16
+
+    def description(self):
+        return "Ably"
+
+
+class TwentyNineCM(Seller):
+    idx_recipient_name = 6
+    idx_recipient_phone = 22
+    idx_zipcode = 23
+    idx_address = 24
+    idx_order_num = 3
+    idx_product_name = 8
+    idx_product_option = 10
+    idx_caution = 25
+
+    def description(self):
+        return "29cm"
+
+
+class Idus(Seller):
+    idx_recipient_name = 14
+    idx_recipient_phone = 17
+    idx_zipcode = 15
+    idx_address = 16
+    idx_order_num = 0
+    idx_product_name = 2
+    idx_product_option = 3
+    idx_caution = 7
+
+    def description(self):
+        return "idus"
