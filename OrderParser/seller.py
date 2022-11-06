@@ -94,3 +94,17 @@ class Idus(Seller):
 
     def description(self):
         return "idus"
+
+
+class CafeTwentyFour(Seller):
+    idx_recipient_name = 11
+    idx_recipient_phone = 15
+    idx_zipcode = 12
+    idx_address = 13
+    idx_order_num = 0
+    idx_product_name = 2
+    idx_product_option = 4
+    idx_caution = 17
+
+    def description(self):
+        return "cafe24"

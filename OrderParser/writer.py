@@ -36,7 +36,7 @@ def write_to_xls(order_list):
         worksheet.write(row_val+1, 0, order.recipient_name, font_style)
         worksheet.write(row_val+1, 2, order.address, font_style)
         worksheet.write(row_val+1, 3, order.recipient_phone, font_style)
-        worksheet.write(row_val+1, 5, "[위탁][패키지]" + order.recipient_name + "_" + order.product_option + "_1개", font_style)
+        worksheet.write(row_val+1, 5, "[위탁][패키지][사은품1]" + order.recipient_name + "_" + order.product_option + "_1개", font_style)
         worksheet.write(row_val+1, 6, order.caution, font_style)
         worksheet.write(row_val+1, 7, order.product_name, font_style)
 
