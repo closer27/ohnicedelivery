@@ -43,12 +43,12 @@ class Book(Seller):
 class StoreFarm(Seller):
     idx_recipient_name = 11
     idx_recipient_phone = 42
-    idx_zipcode = 46
+    idx_zipcode = 48
     idx_address = 44
     idx_order_num = 1
     idx_product_name = 17
     idx_product_option = 20
-    idx_caution = 47
+    idx_caution = 49
 
     def description(self):
         return "Storefarm"
