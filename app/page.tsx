@@ -109,19 +109,27 @@ export default function Home() {
   return (
     <main className="min-h-screen p-8 max-w-5xl mx-auto space-y-12">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-slate-900">
-            Oh Nice Delivery
-          </h1>
-          <p className="text-slate-500 mt-2 text-lg">
-            Merge multiple vendor order files into one unified format.
-          </p>
+      {/* Header / Hero Section */}
+      <div className="flex flex-col items-center justify-center text-center gap-8 py-10">
+        <div className="w-64 md:w-80">
+          {/* Using Next.js Image would be better but standard img is fine for now if configured */}
+          <img src="/bg_pattern.png" alt="Oh Nice Piece" className="w-full h-auto" />
         </div>
+
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 uppercase leading-tight">
+          Have a great day<br />
+          with<br />
+          onp delivery
+        </h1>
+
+        <div className="absolute top-6 left-6 md:top-10 md:left-10">
+          <span className="font-bold text-xl tracking-tighter text-slate-900">oh nice piece</span>
+        </div>
+
         <Button
           variant="outline"
           onClick={() => setShowConfig(!showConfig)}
-          className={cn(showConfig && "bg-slate-100")}
+          className={cn("absolute top-6 right-6 md:top-10 md:right-10", showConfig && "bg-slate-100")}
         >
           <Settings2 className="mr-2 h-4 w-4" />
           {showConfig ? "Hide Settings" : "Vendor Settings"}
@@ -226,6 +234,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <footer className="py-8 text-center text-slate-400 text-sm">
+        Copyright © onpstudio 2026
+      </footer>
     </main>
   );
 }
