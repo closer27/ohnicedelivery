@@ -107,11 +107,10 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-8 max-w-5xl mx-auto space-y-12">
-      {/* Header */}
+    <main className="min-h-screen p-8 max-w-5xl mx-auto space-y-12 bg-[#fae1e8]">
       {/* Header / Hero Section */}
-      <div className="flex flex-col items-center justify-center text-center gap-8 py-10">
-        <div className="w-64 md:w-80">
+      <section className="flex flex-col items-center justify-center text-center gap-8 py-10">
+        <div className="w-40 md:w-48">
           {/* Using Next.js Image would be better but standard img is fine for now if configured */}
           <img src="/bg_pattern.png" alt="Oh Nice Piece" className="w-full h-auto" />
         </div>
@@ -121,20 +120,7 @@ export default function Home() {
           with<br />
           onp delivery
         </h1>
-
-        <div className="absolute top-6 left-6 md:top-10 md:left-10">
-          <span className="font-bold text-xl tracking-tighter text-slate-900">oh nice piece</span>
-        </div>
-
-        <Button
-          variant="outline"
-          onClick={() => setShowConfig(!showConfig)}
-          className={cn("absolute top-6 right-6 md:top-10 md:right-10", showConfig && "bg-slate-100")}
-        >
-          <Settings2 className="mr-2 h-4 w-4" />
-          {showConfig ? "Hide Settings" : "Vendor Settings"}
-        </Button>
-      </div>
+      </section>
 
       {/* Vendor Config Section */}
       {showConfig && (
@@ -161,82 +147,93 @@ export default function Home() {
       )}
 
       {/* Main Workflow */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Left: Upload */}
-        <div className="space-y-6">
-          <div className="flex items-center gap-2">
-            <div className="bg-blue-100 text-blue-700 font-bold h-8 w-8 rounded-full flex items-center justify-center">1</div>
-            <h2 className="text-xl font-semibold">Upload Files</h2>
-          </div>
-
-          <FileUploader onFilesSelected={setFiles} isLoading={isProcessing} />
-
-          <div className="pt-4">
-            <Button
-              size="lg"
-              className="w-full text-base"
-              disabled={files.length === 0 || isProcessing}
-              onClick={handleProcess}
-            >
-              {isProcessing ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Processing...
-                </>
-              ) : (
-                "Process Files"
-              )}
-            </Button>
-          </div>
-        </div>
-
-        {/* Right: Status & Download */}
-        <div className="space-y-6">
-          <div className="flex items-center gap-2">
-            <div className="bg-blue-100 text-blue-700 font-bold h-8 w-8 rounded-full flex items-center justify-center">2</div>
-            <h2 className="text-xl font-semibold">Result</h2>
-          </div>
-
-          <div className="bg-white border rounded-xl p-6 min-h-[300px] shadow-sm flex flex-col">
-            {logs.length === 0 && processedOrders.length === 0 ? (
-              <div className="flex-1 flex flex-col items-center justify-center text-slate-400">
-                <p>Waiting for files...</p>
+      {/* Main Workflow - White Card */}
+      <section className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Left: Upload */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="bg-blue-100 text-blue-700 font-bold h-8 w-8 rounded-full flex items-center justify-center">1</div>
+                <h2 className="text-xl font-semibold">Upload Files</h2>
               </div>
-            ) : (
-              <div className="flex-1 overflow-y-auto max-h-[300px] font-mono text-sm space-y-1 mb-4">
-                {logs.map((log, i) => (
-                  <div key={i} className={cn("flex gap-2", log.startsWith("Error") ? "text-red-500" : "text-slate-600")}>
-                    <span>&gt;</span>
-                    <span>{log}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowConfig(!showConfig)}
+                className={cn("text-slate-500 hover:text-slate-900", showConfig && "bg-slate-100 text-slate-900")}
+              >
+                <Settings2 className="mr-2 h-4 w-4" />
+                Vendor Settings
+              </Button>
+            </div>
 
-            {processedOrders.length > 0 && (
-              <div className="pt-4 border-t mt-auto">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center text-green-600 gap-2">
-                    <CheckCircle2 className="h-5 w-5" />
-                    <span className="font-semibold">{processedOrders.length} orders merged</span>
-                  </div>
+            <FileUploader onFilesSelected={setFiles} isLoading={isProcessing} />
+
+            <div className="pt-4">
+              <Button
+                size="lg"
+                className="w-full text-base"
+                disabled={files.length === 0 || isProcessing}
+                onClick={handleProcess}
+              >
+                {isProcessing ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  "Process Files"
+                )}
+              </Button>
+            </div>
+          </div>
+
+          {/* Right: Status & Download */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-2">
+              <div className="bg-blue-100 text-blue-700 font-bold h-8 w-8 rounded-full flex items-center justify-center">2</div>
+              <h2 className="text-xl font-semibold">Result</h2>
+            </div>
+
+            <div className="bg-slate-50 border rounded-xl p-6 min-h-[300px] shadow-sm flex flex-col">
+              {logs.length === 0 && processedOrders.length === 0 ? (
+                <div className="flex-1 flex flex-col items-center justify-center text-slate-400">
+                  <p>Waiting for files...</p>
                 </div>
-                <Button
-                  className="w-full bg-green-600 hover:bg-green-700 text-white"
-                  size="lg"
-                  onClick={handleDownload}
-                >
-                  <Download className="mr-2 h-5 w-5" />
-                  Download Unified Excel
-                </Button>
-              </div>
-            )}
+              ) : (
+                <div className="flex-1 overflow-y-auto max-h-[300px] font-mono text-sm space-y-1 mb-4">
+                  {logs.map((log, i) => (
+                    <div key={i} className={cn("flex gap-2", log.startsWith("Error") ? "text-red-500" : "text-slate-600")}>
+                      <span>&gt;</span>
+                      <span>{log}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {processedOrders.length > 0 && (
+                <div className="pt-4 border-t mt-auto">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center text-green-600 gap-2">
+                      <CheckCircle2 className="h-5 w-5" />
+                      <span className="font-semibold">{processedOrders.length} orders merged</span>
+                    </div>
+                  </div>
+                  <Button
+                    className="w-full bg-green-600 hover:bg-green-700 text-white"
+                    size="lg"
+                    onClick={handleDownload}
+                  >
+                    <Download className="mr-2 h-5 w-5" />
+                    Download Unified Excel
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      <footer className="py-8 text-center text-slate-400 text-sm">
-        Copyright © onpstudio 2026
-      </footer>
+      </section>
     </main>
   );
 }
