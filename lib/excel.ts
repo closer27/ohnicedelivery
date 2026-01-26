@@ -146,8 +146,8 @@ export async function generateUnifiedExcel(orders: OrderData[]): Promise<Uint8Ar
 
     // Data Rows
     orders.forEach((o, index) => {
-        // [위탁][패키지][사은품1]{Recipient Name}_{Option}_1개
-        const constructedProduct = `[위탁][패키지][사은품1]${o.recipient_name}_${o.product_option}_1개`;
+        // [위탁][패키지][사은품1]{Option}_1개
+        const constructedProduct = `[위탁][패키지][사은품1]${o.product_option}_1개`;
 
         // Format Quantity: append '개' if exists
         const quantityStr = o.product_quantity ? `${o.product_quantity}개` : "";
@@ -161,7 +161,7 @@ export async function generateUnifiedExcel(orders: OrderData[]): Promise<Uint8Ar
             constructedProduct,
             o.caution,
             quantityStr,       // Quantity with '개'
-            o.product_option
+            o.product_name     // Col I: Product Name (Previously Option)
         ];
 
         const row = worksheet.addRow(rowValues);
