@@ -101,7 +101,8 @@ export async function generateUnifiedExcel(orders: OrderData[]): Promise<Uint8Ar
         { width: 61 }, // Product String
         { width: 11 }, // Message
         { width: 11 }, // Quantity (H)
-        { width: 57 }, // Option (I) - Updated to 57
+        { width: 57 }, // Product Name (I)
+        { width: 50 }, // Option (J) - Added
     ];
 
     // Header Row
@@ -114,11 +115,36 @@ export async function generateUnifiedExcel(orders: OrderData[]): Promise<Uint8Ar
         "상품명 (alt+enter 꼭 줄바꿈으로 구분할것, 독립된 셀에 적지마세요)\n(예) 김미진_무광하드_아이폰7_1개\n(예) 이진영_무광터프_아이폰7_3개",
         "배송메세지",
         "", // Quantity (Requested empty)
-        "", // Option (Requested empty)
+        "", // Product Name (Requested empty or handled like I?) - User kept quiet on header text for I, just said content. Assuming empty/hidden style.
+        "옵션", // Option (J) - Explicitly requested "J열에 Option 추가해줘" might imply header title too? Let's use "옵션" to be safe or empty?
+        // User previous behavior: "H, I 열의 헤더 타이틀은 제거해줘".
+        // Now J is added. If consistent, maybe empty? But "Option" is a good guess if distinct.
+        // Let's assume empty for consistency with "hidden meta data" columns H, I. 
+        // Wait, I is Product Name now.
+        // Let's stick to empty to be safe, user can ask to add text later.
+        // Actually, for I, I left it empty in previous step (index 8).
+        // I'll keep J header empty too.
+    ];
+
+    // Wait, let's look at replacement content again.
+    // I need to be careful with the array length.
+
+    // Correct Header:
+    const headerTextsUpdated = [
+        "수령인",
+        "우편번호(생략가능)",
+        "전체 주소",
+        "연락처1\n(예) 0505-780-0505",
+        "연락처2\n(예) 010-2879-6266",
+        "상품명 (alt+enter 꼭 줄바꿈으로 구분할것, 독립된 셀에 적지마세요)\n(예) 김미진_무광하드_아이폰7_1개\n(예) 이진영_무광터프_아이폰7_3개",
+        "배송메세지",
+        "", // Quantity (H)
+        "", // Product Name (I)
+        "", // Option (J)
     ];
 
     const headerRow = worksheet.getRow(1);
-    headerRow.values = headerTexts;
+    headerRow.values = headerTextsUpdated;
     headerRow.height = 54;
 
     headerRow.eachCell((cell, colNumber) => {
@@ -128,8 +154,11 @@ export async function generateUnifiedExcel(orders: OrderData[]): Promise<Uint8Ar
             color: { argb: "FF2B5F18" }, // #2B5F18
         };
 
-        // Skip background color for Cols H (8) and I (9)
-        if (colNumber !== 8 && colNumber !== 9) {
+        // Skip background color for Cols H(8), I(9), J(10) ??
+        // colNumber is 1-based in ExcelJS `eachCell`.
+        // Cols: 1,2,3,4,5,6,7, 8(H), 9(I), 10(J).
+        // User asked "H, I 열의 헤더는 색깔 칠하지마". Likely applies to J too if it's metadata.
+        if (colNumber < 8) { // Only apply to 1-7
             cell.fill = {
                 type: "pattern",
                 pattern: "solid",
@@ -146,8 +175,8 @@ export async function generateUnifiedExcel(orders: OrderData[]): Promise<Uint8Ar
 
     // Data Rows
     orders.forEach((o, index) => {
-        // [위탁][패키지][사은품1]{Option}_1개
-        const constructedProduct = `[위탁][패키지][사은품1]${o.product_option}_1개`;
+        // [위탁][패키지][사은품1]_{Recipient Name}_{Option}_1개
+        const constructedProduct = `[위탁][패키지][사은품1]${o.recipient_name}_${o.product_option}_1개`;
 
         // Format Quantity: append '개' if exists
         const quantityStr = o.product_quantity ? `${o.product_quantity}개` : "";
@@ -161,7 +190,8 @@ export async function generateUnifiedExcel(orders: OrderData[]): Promise<Uint8Ar
             constructedProduct,
             o.caution,
             quantityStr,       // Quantity with '개'
-            o.product_name     // Col I: Product Name (Previously Option)
+            o.product_name,    // Col I: Product Name
+            o.product_option   // Col J: Option (Added)
         ];
 
         const row = worksheet.addRow(rowValues);
